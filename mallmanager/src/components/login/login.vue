@@ -31,23 +31,23 @@ export default {
     }
   },
   methods: {
-    handleLogin () {
-      this.$http.post('login', this.formdata).then(res => {
-        const { meta: { msg, status } } = res.data
-        // 登录成功
-        if (status === 200) {
-          // 跳转home
-          setTimeout(() => {
-            this.$router.push({ name: 'home' })
-          }, 2000)
-          // 提示成功
-          this.$message.success(msg)
-        } else {
-          // 不成功
-          // 1.提示消息
-          this.$message.error(msg)
-        }
-      })
+    async handleLogin () {
+      const res = await this.$http.post('login', this.formdata)
+
+      const { meta: { msg, status } } = res.data
+      // 登录成功
+      if (status === 200) {
+        // 跳转home
+        setTimeout(() => {
+          this.$router.push({ name: 'home' })
+        }, 2000)
+        // 提示成功
+        this.$message.success(msg)
+      } else {
+        // 不成功
+        // 1.提示消息
+        this.$message.error(msg)
+      }
     }
   }
 }
