@@ -33,7 +33,7 @@ export default {
   methods: {
     async handleLogin () {
       const res = await this.$http.post('login', this.formdata)
-
+      console.log(res)
       const { data, meta: { msg, status } } = res.data
       // 登录成功
       if (status === 200) {
