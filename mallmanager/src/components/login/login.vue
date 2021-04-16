@@ -34,13 +34,14 @@ export default {
     async handleLogin () {
       const res = await this.$http.post('login', this.formdata)
 
-      const { meta: { msg, status } } = res.data
+      const { data, meta: { msg, status } } = res.data
       // 登录成功
       if (status === 200) {
+        localStorage.token = data.token
         // 跳转home
         setTimeout(() => {
           this.$router.push({ name: 'home' })
-        }, 2000)
+        }, 1000)
         // 提示成功
         this.$message.success(msg)
       } else {
